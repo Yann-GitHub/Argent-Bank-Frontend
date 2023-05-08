@@ -1,0 +1,35 @@
+.error-content {
+    width: 100%;
+    height: calc(100vh - 70px);
+    // height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &__titlebox {
+        display: flex;
+        flex-direction: column;
+    }
+    &__img {
+        width: 600px
+
+    }
+    &__subtitle {
+        margin: 0;
+        margin-top: 30px;
+        font-size: 25px;
+        text-align: center;
+
+    }
+    &__link {
+        font-size: 18px;
+        margin-top: 1rem;
+        text-decoration: none;
+        color: $color-txt;
+        &:hover{
+            color: $color-bg;
+            text-decoration: underline;
+        }
+
+    }
+}
