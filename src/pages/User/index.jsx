@@ -8,12 +8,14 @@ import { Link } from "react-router-dom"
 
 function User() {
   return (
-    <div className="user-content">
-      User Page
-      <Link to="/" className="user-content__link">
-        link
-      </Link>
-    </div>
+    <main>
+      <div className="user-content">
+        User Page
+        <Link to="/" className="user-content__link">
+          link
+        </Link>
+      </div>
+    </main>
   )
 }
 

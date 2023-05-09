@@ -18,9 +18,15 @@ html {
   .main {
     flex: 1;
   }
+
+  .main-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
   
   .bg-dark {
-    background-color: #12002b;
+    background-color: $color-bg-dark;
   }
   
   .sr-only {

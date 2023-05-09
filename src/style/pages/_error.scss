@@ -1,7 +1,5 @@
 .error-content {
     width: 100%;
-    height: calc(100vh - 70px);
-    // height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -27,7 +25,7 @@
         text-decoration: none;
         color: $color-txt;
         &:hover{
-            color: $color-bg;
+            color: $color-primary;
             text-decoration: underline;
         }
 

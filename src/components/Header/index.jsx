@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import Logo from "../../assets/argentBankLogo.png"
 
 /**
@@ -19,10 +20,10 @@ function Header() {
         <h1 className="sr-only">Argent Bank</h1>
       </NavLink>
       <div>
-        <a className="main-nav-item" href="./sign-in.html">
+        <Link to="/signin" className="main-nav-item">
           <i className="fa fa-user-circle"></i>
           &nbsp;Sign In
-        </a>
+        </Link>
       </div>
     </nav>
   )

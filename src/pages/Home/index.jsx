@@ -10,10 +10,12 @@ import Features from "../../components/Features"
 
 function Home() {
   return (
-    <div className="home-content">
-      <HeroBanner />
-      <Features />
-    </div>
+    <main className="main">
+      <div className="home-content">
+        <HeroBanner />
+        <Features />
+      </div>
+    </main>
   )
 }
 
