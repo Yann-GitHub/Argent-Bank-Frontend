@@ -12,7 +12,8 @@ function App() {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/user/:id" element={<User />} />
+          {/* <Route path="/user/:id" element={<User />} /> */}
+          <Route path="/user" element={<User />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
