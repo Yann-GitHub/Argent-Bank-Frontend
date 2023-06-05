@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { userSelector, login } from "../../features/auth"
 import * as userActions from "../../features/auth"
-
 import Loader from "../Loader"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 function SignInForm() {
   //Used for accessibility to get the focus on element and help the screen reader
@@ -86,7 +87,8 @@ function SignInForm() {
   return (
     <>
       <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
+        {/* <i className="fa fa-user-circle sign-in-icon"></i> */}
+        <FontAwesomeIcon className="sign-in-icon" icon={faUserCircle} />
         <p
           ref={errRef}
           className={errorMsg ? "errmsg" : "hidden"}

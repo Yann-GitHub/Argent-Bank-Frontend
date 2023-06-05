@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom"
 import { Link } from "react-router-dom"
 import Logo from "../../assets/argentBankLogo.png"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 /**
  * Component for displaying the header with navigation links.
@@ -21,7 +23,8 @@ function Header() {
       </NavLink>
       <div>
         <Link to="/signin" className="main-nav-item">
-          <i className="fa fa-user-circle"></i>
+          {/* <i className="fa fa-user-circle"></i> */}
+          <FontAwesomeIcon icon={faUserCircle} />
           &nbsp;Sign In
         </Link>
       </div>
