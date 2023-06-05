@@ -18,7 +18,7 @@ function SignInForm() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [rememberMe, setRememberMe] = useState(false)
-  const { token, authenticationStatus, errorMsg, isLoading } =
+  const { token, mail, authenticationStatus, errorMsg, isLoading } =
     useSelector(userSelector)
 
   // To set the focus on the first input when the component load
@@ -57,7 +57,7 @@ function SignInForm() {
     }
   }, [authenticationStatus, navigate])
 
-  // Redirection vers la page utilisateur si le token est dans le global state
+  // Redirect to the user page if the token is store in the global state
   useEffect(() => {
     if (token) {
       navigate(`/user`)
@@ -70,6 +70,12 @@ function SignInForm() {
   //     }
   //     // eslint-disable-next-line
   //   }, [])
+
+  useEffect(() => {
+    if (mail) {
+      setEmail(mail)
+    }
+  }, [mail])
 
   const handleSubmit = (e) => {
     e.preventDefault()

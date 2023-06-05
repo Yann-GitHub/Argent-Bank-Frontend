@@ -2,8 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "../utils/api"
 
 const initialState = {
-  token: localStorage.getItem("token") ?? null,
-  email: "",
+  // token: localStorage.getItem("token") ?? null,
+  token: null,
+  // email: "",
+  // email: localStorage.getItem("email") ?? null,
+  mail: localStorage.getItem("email") ?? null,
   authenticationStatus: "",
   errorMsg: "",
   isLoading: false,
@@ -29,7 +32,10 @@ export const login = createAsyncThunk(
       )
 
       if (rememberMe) {
-        localStorage.setItem("token", response.data.body.token)
+        // localStorage.setItem("token", response.data.body.token)
+        localStorage.setItem("email", email)
+      } else {
+        localStorage.removeItem("email")
       }
 
       const token = response?.data?.body?.token
@@ -63,7 +69,8 @@ const { actions, reducer } = createSlice({
         state.token = action.payload.token
         state.authenticationStatus = "success"
         state.isLoading = false
-        state.email = action.payload.email
+        // state.email = action.payload.email
+        state.mail = action.payload.email
       })
       .addCase(login.pending, (state, action) => {
         state.authenticationStatus = "pending"
