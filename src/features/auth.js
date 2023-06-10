@@ -4,9 +4,10 @@ import axios from "../utils/api"
 const initialState = {
   // token: localStorage.getItem("token") ?? null,
   token: null,
-  // email: "",
-  // email: localStorage.getItem("email") ?? null,
   mail: localStorage.getItem("email") ?? null,
+  firstName: "",
+  lastName: "",
+  id: "",
   authenticationStatus: "",
   errorMsg: "",
   isLoading: false,
@@ -47,9 +48,47 @@ export const login = createAsyncThunk(
         return thunkAPI.rejectWithValue("No Server Response")
       }
 
-      console.log(err.response.data)
-      console.log(err.response.data.message)
-      console.log(err.response.status)
+      // console.log(err.response.data)
+      // console.log(err.response.data.message)
+      // console.log(err.response.status)
+      return thunkAPI.rejectWithValue(err.response.data.message)
+    }
+  }
+)
+
+// Load Profile
+export const loadProfile = createAsyncThunk(
+  "loadProfile",
+  async ({ token }, thunkAPI) => {
+    try {
+      const response = await axios.post(
+        process.env.REACT_APP_USER_PROFILE_ENDPOINT,
+        {},
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      const firstName = response?.data?.body?.firstName
+      const lastName = response?.data?.body?.lastName
+      const email = response?.data?.body?.email
+      const id = response?.data?.body?.id
+
+      // console.log(firstName, lastName, email, id)
+
+      // return response?.data?.body?.token
+      return { firstName, lastName, email, id }
+    } catch (err) {
+      if (!err?.response) {
+        return thunkAPI.rejectWithValue("No Server Response")
+      }
+
+      // console.log(err.response.data)
+      // console.log(err.response.data.message)
+      // console.log(err.response.status)
       return thunkAPI.rejectWithValue(err.response.data.message)
     }
   }
@@ -62,6 +101,16 @@ const { actions, reducer } = createSlice({
     clearErrorMsg: (state, action) => {
       state.errorMsg = ""
     },
+    signOut: (state, action) => {
+      state.token = null
+      state.mail = localStorage.getItem("email") ?? null
+      state.firstName = ""
+      state.lastName = ""
+      state.id = ""
+      state.authenticationStatus = ""
+      state.errorMsg = ""
+      state.isLoading = false
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -69,8 +118,8 @@ const { actions, reducer } = createSlice({
         state.token = action.payload.token
         state.authenticationStatus = "success"
         state.isLoading = false
-        // state.email = action.payload.email
         state.mail = action.payload.email
+        state.errorMsg = ""
       })
       .addCase(login.pending, (state, action) => {
         state.authenticationStatus = "pending"
@@ -80,14 +129,32 @@ const { actions, reducer } = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.authenticationStatus = "rejected"
         state.isLoading = false
-        // state.errorMsg = action.payload.message
+        state.errorMsg = action.payload
+      })
+      .addCase(loadProfile.fulfilled, (state, action) => {
+        // state.authenticationStatus = "rejected"
+        state.isLoading = false
+        state.errorMsg = ""
+        state.firstName = action.payload.firstName
+        state.lastName = action.payload.lastName
+        state.id = action.payload.id
+        state.mail = action.payload.email
+      })
+      .addCase(loadProfile.pending, (state, action) => {
+        // state.authenticationStatus = "pending"
+        state.isLoading = true
+        state.errorMsg = ""
+      })
+      .addCase(loadProfile.rejected, (state, action) => {
+        // state.authenticationStatus = "rejected"
+        state.isLoading = false
         state.errorMsg = action.payload
       })
   },
 })
 
-export const { clearErrorMsg } = actions
+export const { clearErrorMsg, signOut } = actions
 export default reducer
 
-//selector used with the hook useSelector
+// Selector used with the hook useSelector
 export const userSelector = (state) => state.user

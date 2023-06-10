@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons"
 
 function SignInForm() {
-  //Used for accessibility to get the focus on element and help the screen reader
+  // Used for accessibility to get the focus on element and help the screen reader
   const emailRef = useRef() // used to set the focus on the first input when the component load
   const errRef = useRef() // used to set the focus on error when an error occure for screen Reader
 
@@ -50,33 +50,21 @@ function SignInForm() {
     }
   }, [email, password, errorMsg, dispatch])
 
-  // Redirect to the user page if the authentication status is 'success'
+  // Redirect to the Profile page if the token is store in the global state or if the authentication status is 'success'
   useEffect(() => {
-    if (authenticationStatus === "success") {
-      navigate(`/user`)
+    if (authenticationStatus === "success" || token) {
+      navigate(`/profile`)
     }
-  }, [authenticationStatus, navigate])
+  }, [authenticationStatus, token, navigate])
 
-  // Redirect to the user page if the token is store in the global state
-  useEffect(() => {
-    if (token) {
-      navigate(`/user`)
-    }
-  }, [token, navigate])
-
-  //   useEffect(() => {
-  //     if (token) {
-  //       navigate(`/user`)
-  //     }
-  //     // eslint-disable-next-line
-  //   }, [])
-
+  // Prefilling the email field if mail is store in the global state
   useEffect(() => {
     if (mail) {
       setEmail(mail)
     }
   }, [mail])
 
+  // Function handling from submission
   const handleSubmit = (e) => {
     e.preventDefault()
     dispatch(
@@ -93,7 +81,6 @@ function SignInForm() {
   return (
     <>
       <section className="sign-in-content">
-        {/* <i className="fa fa-user-circle sign-in-icon"></i> */}
         <FontAwesomeIcon className="sign-in-icon" icon={faUserCircle} />
         <p
           ref={errRef}

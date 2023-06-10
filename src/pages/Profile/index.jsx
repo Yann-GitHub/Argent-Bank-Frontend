@@ -1,17 +1,50 @@
+import { useEffect } from "react"
+// import Loader from "../../components/Loader"
+import { useDispatch, useSelector } from "react-redux"
+import { userSelector, loadProfile } from "../../features/auth"
+import { useNavigate } from "react-router-dom"
+
 /**
  * Composant representing the user page.
  *
  * @return {JSX.Element} - The rendered user page.
  */
 
-function User() {
+function Profile() {
+  // console.log("test")
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const {
+    token,
+    // mail,
+    // authenticationStatus,
+    // errorMsg,
+    // isLoading,
+    firstName,
+    lastName,
+    // id,
+  } = useSelector(userSelector)
+
+  useEffect(() => {
+    if (token) {
+      dispatch(loadProfile({ token }))
+    } else {
+      navigate(`/signin`)
+    }
+  }, [token, dispatch, navigate])
+
+  // if (isLoading) {
+  //   return <Loader />
+  // }
+
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {firstName} {lastName}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
@@ -50,4 +83,4 @@ function User() {
   )
 }
 
-export default User
+export default Profile
