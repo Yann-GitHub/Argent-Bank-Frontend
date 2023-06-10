@@ -1,5 +1,5 @@
 import FeatureItem from "../FeatureItem"
-import { featuresData } from "../../data/featuresData"
+import { featuresData } from "../../data/mockData"
 
 function Features() {
   return (

@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userSelector, loadProfile } from "../../features/auth"
 import { useNavigate } from "react-router-dom"
+import AccountSection from "../../components/AccountSection"
 
 /**
  * Composant representing the user page.
@@ -49,7 +50,10 @@ function Profile() {
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
-      <section className="account">
+
+      <AccountSection />
+
+      {/* <section className="account">
         <div className="account-content-wrapper">
           <h3 className="account-title">Argent Bank Checking (x8349)</h3>
           <p className="account-amount">$2,082.79</p>
@@ -59,6 +63,7 @@ function Profile() {
           <button className="transaction-button">View transactions</button>
         </div>
       </section>
+
       <section className="account">
         <div className="account-content-wrapper">
           <h3 className="account-title">Argent Bank Savings (x6712)</h3>
@@ -69,6 +74,7 @@ function Profile() {
           <button className="transaction-button">View transactions</button>
         </div>
       </section>
+
       <section className="account">
         <div className="account-content-wrapper">
           <h3 className="account-title">Argent Bank Credit Card (x8349)</h3>
@@ -78,7 +84,7 @@ function Profile() {
         <div className="account-content-wrapper cta">
           <button className="transaction-button">View transactions</button>
         </div>
-      </section>
+      </section> */}
     </main>
   )
 }
