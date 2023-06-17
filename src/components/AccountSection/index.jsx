@@ -5,7 +5,6 @@ function AccountSection() {
   return (
     <>
       {accountsData.map((account, index) => (
-        // <Account key={index} {...account} />
         <Account
           key={`${index}-account`}
           title={account.title}

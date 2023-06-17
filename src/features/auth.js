@@ -41,7 +41,6 @@ export const login = createAsyncThunk(
 
       const token = response?.data?.body?.token
 
-      // return response?.data?.body?.token
       return { token, email }
     } catch (err) {
       if (!err?.response) {
@@ -77,9 +76,6 @@ export const loadProfile = createAsyncThunk(
       const email = response?.data?.body?.email
       const id = response?.data?.body?.id
 
-      // console.log(firstName, lastName, email, id)
-
-      // return response?.data?.body?.token
       return { firstName, lastName, email, id }
     } catch (err) {
       if (!err?.response) {
@@ -90,6 +86,44 @@ export const loadProfile = createAsyncThunk(
       // console.log(err.response.data.message)
       // console.log(err.response.status)
       return thunkAPI.rejectWithValue(err.response.data.message)
+    }
+  }
+)
+
+// Update Profile
+export const updateProfile = createAsyncThunk(
+  "updateProfile",
+  async ({ firstname, lastname, token }, thunkAPI) => {
+    try {
+      const response = await axios.put(
+        process.env.REACT_APP_USER_PROFILE_ENDPOINT,
+        {
+          firstName: firstname,
+          lastName: lastname,
+        },
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      const email = response?.data?.body?.email
+      const id = response?.data?.body?.id
+      const firstName = response?.data?.body?.firstName
+      const lastName = response?.data?.body?.lastName
+
+      // console.log(response.data)
+
+      return { firstName, lastName, email, id }
+    } catch (err) {
+      if (!err?.response) {
+        return thunkAPI.rejectWithValue("No Server Response")
+      }
+
+      thunkAPI.rejectWithValue(err.response.data.message)
     }
   }
 )
@@ -131,8 +165,8 @@ const { actions, reducer } = createSlice({
         state.isLoading = false
         state.errorMsg = action.payload
       })
+
       .addCase(loadProfile.fulfilled, (state, action) => {
-        // state.authenticationStatus = "rejected"
         state.isLoading = false
         state.errorMsg = ""
         state.firstName = action.payload.firstName
@@ -141,12 +175,25 @@ const { actions, reducer } = createSlice({
         state.mail = action.payload.email
       })
       .addCase(loadProfile.pending, (state, action) => {
-        // state.authenticationStatus = "pending"
         state.isLoading = true
         state.errorMsg = ""
       })
       .addCase(loadProfile.rejected, (state, action) => {
-        // state.authenticationStatus = "rejected"
+        state.isLoading = false
+        state.errorMsg = action.payload
+      })
+
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.errorMsg = ""
+        state.firstName = action.payload.firstName
+        state.lastName = action.payload.lastName
+      })
+      .addCase(updateProfile.pending, (state, action) => {
+        state.isLoading = true
+        state.errorMsg = ""
+      })
+      .addCase(updateProfile.rejected, (state, action) => {
         state.isLoading = false
         state.errorMsg = action.payload
       })

@@ -1,9 +1,3 @@
-/**
- * Component for displaying the footer.
- *
- * @returns {JSX.Element} - React Component - Footer.
- */
-
 function Footer() {
   return (
     <footer className="footer">

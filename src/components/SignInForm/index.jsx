@@ -21,7 +21,7 @@ function SignInForm() {
   const { token, mail, authenticationStatus, errorMsg, isLoading } =
     useSelector(userSelector)
 
-  // To set the focus on the first input when the component load
+  // To set the focus on the first input when the component load (Accessibility)
   useEffect(() => {
     emailRef.current.focus()
   }, [])
@@ -37,7 +37,7 @@ function SignInForm() {
       clearError()
     }
 
-    // Set the focus on the error message if errorMsg is not an empty string
+    // Set the focus on the error message if errorMsg is not an empty string (Accessibility)
     if (errorMsg !== "") {
       errRef.current.focus()
     }

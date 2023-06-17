@@ -1,9 +1,3 @@
-/**
- * Component for displaying the header with navigation links.
- *
- * @returns {JSX.Element} - React Component - Header.
- */
-
 function HeroBanner() {
   return (
     <div className="hero">

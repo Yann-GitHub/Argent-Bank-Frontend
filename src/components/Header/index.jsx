@@ -9,12 +9,6 @@ import {
 import { useSelector, useDispatch } from "react-redux"
 import { userSelector, signOut } from "../../features/auth"
 
-/**
- * Component for displaying the header with navigation links.
- *
- * @returns {JSX.Element} - React Component - Header.
- */
-
 function Header() {
   const { firstName, token } = useSelector(userSelector)
 
@@ -42,7 +36,11 @@ function Header() {
               <FontAwesomeIcon icon={faUserCircle} />
               &nbsp;{firstName}
             </Link>
-            <Link className="main-nav-item" onClick={() => dispatch(signOut())}>
+            <Link
+              to="/"
+              className="main-nav-item"
+              onClick={() => dispatch(signOut())}
+            >
               <FontAwesomeIcon icon={faRightFromBracket} />
               &nbsp;Sign Out
             </Link>
