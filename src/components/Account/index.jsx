@@ -1,3 +1,5 @@
+import PropTypes from "prop-types"
+
 function Account({ title, amount, amountDescription }) {
   return (
     <section className="account">
@@ -11,6 +13,12 @@ function Account({ title, amount, amountDescription }) {
       </div>
     </section>
   )
+}
+
+Account.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  amountDescription: PropTypes.string.isRequired,
 }
 
 export default Account

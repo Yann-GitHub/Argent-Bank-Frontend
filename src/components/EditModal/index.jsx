@@ -6,6 +6,7 @@ import * as userActions from "../../features/auth"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUserCircle, faXmark } from "@fortawesome/free-solid-svg-icons"
 import Loader from "../Loader"
+import PropTypes from "prop-types"
 
 function EditModal({ isOpen, onRequestClose }) {
   // used to set the focus on error when an error occure for screen Reader (accessibility)
@@ -125,6 +126,11 @@ function EditModal({ isOpen, onRequestClose }) {
       </section>
     </Modal>
   )
+}
+
+EditModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onRequestClose: PropTypes.func.isRequired,
 }
 
 export default EditModal
