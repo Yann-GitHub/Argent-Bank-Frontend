@@ -76,7 +76,7 @@ The page will reload when you make changes. You may also see any lint errors in 
 
 ### Additional API Documentation for Transactions
 
-In addition to the frontend application, we have designed and modeled the API for transactions. To provide a comprehensive understanding of the proposed transaction APIs, we have created a .yalm document conforming to the Swagger format. You can find this document in the file swagger.yaml
+In addition to the frontend application, we have designed and modeled the API for transactions. To provide a comprehensive understanding of the proposed transaction APIs, we have created a .yalm document conforming to the Swagger format. You can find this document in the file [swagger.yaml](./swagger.yaml)
 
 The transaction APIs aim to fulfill the following user requirements:
 
